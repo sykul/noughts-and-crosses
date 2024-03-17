@@ -1,13 +1,14 @@
 const gameBoard = (function() {
-    const topLeft = '';
-    const topMiddle = '';
-    const topRight = '';
-    const middleLeft = '';
-    const middleMiddle = '';
-    const middleRight = '';
-    const bottomLeft = '';
-    const bottomMiddle = '';
-    const bottomRight = '';
+    const numberOfRows = 3;
+    const numberOfColumns = 3;
+    const board = []
 
-    return { topLeft, topMiddle, topRight, middleLeft, middleMiddle, middleRight, bottomLeft, bottomMiddle, bottomRight };
+    for (let i = 0; i < numberOfRows; i++) {
+        board[i] = [];
+        for (let j = 0; j < numberOfColumns; j++) {
+            board[i][j] = [];
+        }
+    }
+    return board;
 })();
+
