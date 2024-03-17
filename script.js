@@ -1,14 +1,29 @@
 const gameBoard = (function() {
     const numberOfRows = 3;
     const numberOfColumns = 3;
-    const board = []
-
+    const boardArray = []
     for (let i = 0; i < numberOfRows; i++) {
-        board[i] = [];
+        boardArray[i] = [];
         for (let j = 0; j < numberOfColumns; j++) {
-            board[i][j] = [];
+            boardArray[i][j] = [];
         }
     }
-    return board;
+
+
+    return boardArray;
 })();
 
+const gameController = (function() {
+    function playRound() {
+
+    }
+
+    function trackPlayerScore() {
+        
+    }
+
+})();
+
+const screenController = (function() {
+
+})();
