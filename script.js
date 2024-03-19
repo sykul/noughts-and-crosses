@@ -13,6 +13,12 @@ const gameBoard = (function() {
     return boardArray;
 })();
 
+function createPlayer(name, OorX) {
+    const playerName = name;
+    const symbol = OorX;
+    return {playerName, symbol}
+}
+
 const gameController = (function() {
     function playRound() {
 
@@ -27,3 +33,6 @@ const gameController = (function() {
 const screenController = (function() {
 
 })();
+
+const player1 = createPlayer('player1', 'X');
+const player2 = createPlayer('player2', 'O');
