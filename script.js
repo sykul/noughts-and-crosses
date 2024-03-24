@@ -15,26 +15,16 @@ function createPlayer(name, OorX) {
 }
 
 const winningConditions = (function() {
-    const XwinsOneFourSeven = createGameBoard().map((element, index) => { return (index == 0 || index == 3 || index == 6) ? 'X' : element });
-    const XwinsTwoFiveEight = createGameBoard().map((element, index) => { return (index == 1 || index == 4 || index == 7) ? 'X' : element });
-    const XwinsThreeSixNine = createGameBoard().map((element, index) => { return (index == 2 || index == 5 || index == 8) ? 'X' : element });
-    const XwinsOneFiveNine = createGameBoard().map((element, index) => { return (index == 0 || index == 4 || index == 8) ? 'X' : element });
-    const XwinsThreeFiveSeven = createGameBoard().map((element, index) => { return (index == 2 || index == 4 || index == 6) ? 'X' : element });
-    const XwinsOneTwoThree = createGameBoard().map((element, index) => { return (index == 0 || index == 1 || index == 2) ? 'X' : element });
-    const XwinsFourFiveSix = createGameBoard().map((element, index) => { return (index == 3 || index == 4 || index == 5) ? 'X' : element });
-    const XwinsSevenEightNine  = createGameBoard().map((element, index) => { return (index == 6 || index == 7 || index == 8) ? 'X' : element });
+    const OneFourSeven = [0, 3, 6];
+    const TwoFiveEight = [1, 4, 7];
+    const ThreeSixNine = [2, 5, 8];
+    const OneFiveNine = [0, 4, 8];
+    const ThreeFiveSeven = [2, 4, 6];
+    const OneTwoThree = [0, 1, 2];
+    const FourFiveSix = [3, 4, 5];
+    const SevenEightNine  = [6, 7, 8];
 
-    const YwinsOneFourSeven = createGameBoard().map((element, index) => { return (index == 0 || index == 3 || index == 6) ? 'Y' : element });
-    const YwinsTwoFiveEight = createGameBoard().map((element, index) => { return (index == 1 || index == 4 || index == 7) ? 'Y' : element });
-    const YwinsThreeSixNine = createGameBoard().map((element, index) => { return (index == 2 || index == 5 || index == 8) ? 'Y' : element });
-    const YwinsOneFiveNine = createGameBoard().map((element, index) => { return (index == 0 || index == 4 || index == 8) ? 'Y' : element });
-    const YwinsThreeFiveSeven = createGameBoard().map((element, index) => { return (index == 2 || index == 4 || index == 6) ? 'Y' : element });
-    const YwinsOneTwoThree = createGameBoard().map((element, index) => { return (index == 0 || index == 1 || index == 2) ? 'Y' : element });
-    const YwinsFourFiveSix = createGameBoard().map((element, index) => { return (index == 3 || index == 4 || index == 5) ? 'Y' : element });
-    const YwinsSevenEightNine  = createGameBoard().map((element, index) => { return (index == 6 || index == 7 || index == 8) ? 'Y' : element });
-
-    return {XwinsOneFourSeven, XwinsTwoFiveEight, XwinsThreeSixNine, XwinsOneFiveNine, XwinsThreeFiveSeven, XwinsOneTwoThree, XwinsFourFiveSix, XwinsSevenEightNine,
-        YwinsOneFourSeven, YwinsTwoFiveEight, YwinsThreeSixNine, YwinsOneFiveNine, YwinsThreeFiveSeven, YwinsOneTwoThree, YwinsFourFiveSix, YwinsSevenEightNine}
+    return {OneFourSeven,TwoFiveEight,ThreeSixNine,OneFiveNine,ThreeFiveSeven,OneTwoThree,FourFiveSix,SevenEightNine}
 })()
 
 const gameController = (function() {
