@@ -29,9 +29,8 @@ const winningConditions = (function() {
 
 const gameController = (function() {
     function checkWinningCondition() {
-        for (i in gameBoard) {
-             gameBoard[i];
-            return 
+        for (let property in winningConditions) {
+            console.log(winningConditions[property]); 
         }
     }
 
