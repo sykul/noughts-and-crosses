@@ -1,5 +1,5 @@
 function createGameBoard() {
-    const boardArray = ['','','','','','','','','']
+    const boardArray = ['X','','','','','','','','']
     return boardArray;
 }
 
@@ -29,8 +29,14 @@ const winningConditions = (function() {
 
 const gameController = (function() {
     function checkWinningCondition() {
-        for (let property in winningConditions) {
-            console.log(winningConditions[property]); 
+        for (let condition in winningConditions) {
+            let checkingArray = [false, false, false]
+            for (let position in winningConditions[condition]) {
+                let positionToCheck = winningConditions[condition][position];
+                if (gameBoard[positionToCheck] == 'X') {
+                    console.log(winningConditions[condition].indexOf(positionToCheck));
+                }
+            }
         }
     }
 
