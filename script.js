@@ -1,5 +1,5 @@
 function createGameBoard() {
-    const boardArray = ['X','','','','','','','','']
+    const boardArray = ['X','X','X','','','','','','']
     return boardArray;
 }
 
@@ -28,14 +28,17 @@ const winningConditions = (function() {
 })()
 
 const gameController = (function() {
+
+    const currentPlayer = 'player1'
+
+    
     function checkWinningCondition() {
-        for (let condition in winningConditions) {
-            let checkingArray = [false, false, false]
-            for (let position in winningConditions[condition]) {
-                let positionToCheck = winningConditions[condition][position];
-                if (gameBoard[positionToCheck] == 'X') {
-                    console.log(winningConditions[condition].indexOf(positionToCheck));
-                }
+        for (const condition in winningConditions) {
+            positionToCheck1 = winningConditions[condition][0];
+            positionToCheck2 = winningConditions[condition][1];
+            positionToCheck3 = winningConditions[condition][2];       
+            if ((gameBoard[positionToCheck1] == 'X' || gameBoard[positionToCheck1] == 'O') && (gameBoard[positionToCheck1] == gameBoard[positionToCheck2]) && (gameBoard[positionToCheck1] == gameBoard[positionToCheck3])) {
+                console.log(`winning condition! ${condition}`);
             }
         }
     }
@@ -55,8 +58,6 @@ const gameController = (function() {
     function trackPlayerScore() {
         
     }
-
-    const currentPlayer = 'player1'
 
 
     return {currentPlayer, checkWinningCondition, playRound}
