@@ -1,5 +1,5 @@
 function createGameBoard() {
-    const boardArray = ['X','X','X','','','','','','']
+    const boardArray = ['','','','','','','','','']
     return boardArray;
 }
 
@@ -29,29 +29,32 @@ const winningConditions = (function() {
 
 const gameController = (function() {
 
-    const currentPlayer = 'player1'
+    let currentPlayer = 'player1'
 
+    function switchPlayer(currentPlayer) {
+        if (currentPlayer == 'player1') {
+            return 'player2';
+        } else if (currentPlayer == 'player2') {
+            return 'player1';
+        }
+    }
     
     function checkWinningCondition() {
         for (const condition in winningConditions) {
             positionToCheck1 = winningConditions[condition][0];
             positionToCheck2 = winningConditions[condition][1];
             positionToCheck3 = winningConditions[condition][2];       
-            if ((gameBoard[positionToCheck1] == 'X' || gameBoard[positionToCheck1] == 'O') && (gameBoard[positionToCheck1] == gameBoard[positionToCheck2]) && (gameBoard[positionToCheck1] == gameBoard[positionToCheck3])) {
+            if ((gameBoard[positionToCheck1] == 'X' || gameBoard[positionToCheck1] == 'O')
+            && (gameBoard[positionToCheck1] == gameBoard[positionToCheck2]) && (gameBoard[positionToCheck1] == gameBoard[positionToCheck3])) {
                 console.log(`winning condition! ${condition}`);
+                console.log(`Winner: ${currentPlayer}`);
             }
         }
     }
 
     function playRound() { 
-        for (let i = 0; i<50; i++) {
-            if (gameController.currentPlayer == 'player1') {
-                console.log(gameController.currentPlayer);
-                gameController.currentPlayer = 'player2'
-            } else if (gameController.currentPlayer == 'player2') {
-                console.log(gameController.currentPlayer);
-                gameController.currentPlayer = 'player1'
-            }
+        for (let i = 0; i<10; i++) {
+            currentPlayer = switchPlayer(currentPlayer);
         }
     }
 
@@ -69,3 +72,5 @@ const displayController = (function() {
 
 const player1 = createPlayer('player1', 'X');
 const player2 = createPlayer('player2', 'O');
+
+gameController.playRound()
