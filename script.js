@@ -54,7 +54,15 @@ const gameController = (function() {
 
     function playRound() { 
         for (let i = 0; i<10; i++) {
+            let input = prompt("Position?");
+            if (Number.isInteger(input) && input > 0 && input < 10) {
+                return 'hi';
+            } else {
+                return 'no';
+            }
+
             currentPlayer = switchPlayer(currentPlayer);
+
         }
     }
 
