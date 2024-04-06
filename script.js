@@ -38,15 +38,7 @@ const gameController = (function() {
             return 'player1';
         }
     }
-
-    function checkInput(input) {
-        if (!(Number.isInteger(input) && input >= 0 && input < 10)) {
-            console.log('Needs to be a whole number from 0 to 9');
-            playRound();
-        } else {
-            console.log(input);
-        }
-    }
+    
     
     function checkWinningCondition() {
         for (const condition in winningConditions) {
@@ -62,9 +54,12 @@ const gameController = (function() {
     }
 
     function playRound() { 
+        let position;
         for (let i = 0; i<10; i++) {
-            let position = Number(prompt("Position?"));
-            checkInput(position);
+            do {
+                position = Number(prompt("Position?"));
+            } while (!(Number.isInteger(position) && position >= 0 && position < 10));
+
             currentPlayer = switchPlayer(currentPlayer);
             console.log(currentPlayer);
         }
