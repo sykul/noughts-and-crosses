@@ -14,6 +14,9 @@ function createPlayer(name, OorX) {
     return {playerName, symbol, increaseScore, resetScore}
 }
 
+const player1 = createPlayer('player1', 'X');
+const player2 = createPlayer('player2', 'O');
+
 const winningConditions = (function() {
     const OneFourSeven = [0, 3, 6];
     const TwoFiveEight = [1, 4, 7];
@@ -29,13 +32,13 @@ const winningConditions = (function() {
 
 const gameController = (function() {
 
-    let currentPlayer = 'player1'
+    let currentPlayer = player1;
 
     function switchPlayer(currentPlayer) {
-        if (currentPlayer == 'player1') {
-            return 'player2';
-        } else if (currentPlayer == 'player2') {
-            return 'player1';
+        if (currentPlayer == player1) {
+            return player2;
+        } else if (currentPlayer == player2) {
+            return player1;
         }
     }
     
@@ -55,13 +58,17 @@ const gameController = (function() {
 
     function playRound() { 
         let position;
-        for (let i = 0; i<10; i++) {
+        for (let i = 0; i<9; i++) {
             do {
                 position = Number(prompt("Position?"));
-            } while (!(position && Number.isInteger(position) && position >= 0 && position < 10));
-
+            } while (!(position.toString().length > 0
+                        && Number.isInteger(position)
+                        && position >= 0
+                        && position < 9
+                        && gameBoard[position] == ''));
+            gameBoard[position] = currentPlayer.symbol;
             currentPlayer = switchPlayer(currentPlayer);
-            console.log(currentPlayer);
+            console.log(gameBoard);
         }
     }
 
@@ -76,6 +83,3 @@ const gameController = (function() {
 const displayController = (function() {
     
 })();
-
-const player1 = createPlayer('player1', 'X');
-const player2 = createPlayer('player2', 'O');
