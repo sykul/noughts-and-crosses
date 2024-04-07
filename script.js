@@ -49,11 +49,12 @@ const gameController = (function() {
             positionToCheck2 = winningConditions[condition][1];
             positionToCheck3 = winningConditions[condition][2];       
             if ((gameBoard[positionToCheck1] == 'X' || gameBoard[positionToCheck1] == 'O')
-            && (gameBoard[positionToCheck1] == gameBoard[positionToCheck2]) && (gameBoard[positionToCheck1] == gameBoard[positionToCheck3])) {
-                console.log(`winning condition! ${condition}`);
-                console.log(`Winner: ${currentPlayer}`);
+                    && (gameBoard[positionToCheck1] == gameBoard[positionToCheck2])
+                    && (gameBoard[positionToCheck1] == gameBoard[positionToCheck3])) {
+                return true;
             }
         }
+        return false;
     }
 
     function playRound() { 
@@ -67,8 +68,12 @@ const gameController = (function() {
                         && position < 9
                         && gameBoard[position] == ''));
             gameBoard[position] = currentPlayer.symbol;
+
+            if (checkWinningCondition() === true) {
+                return currentPlayer.playerName;
+            };
+            
             currentPlayer = switchPlayer(currentPlayer);
-            console.log(gameBoard);
         }
     }
 
@@ -77,7 +82,7 @@ const gameController = (function() {
     }
 
 
-    return {currentPlayer, checkWinningCondition, playRound}
+    return {playRound}
 })();
 
 const displayController = (function() {
