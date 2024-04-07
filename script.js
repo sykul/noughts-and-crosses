@@ -58,7 +58,7 @@ const gameController = (function() {
         for (let i = 0; i<10; i++) {
             do {
                 position = Number(prompt("Position?"));
-            } while (!(Number.isInteger(position) && position >= 0 && position < 10));
+            } while (!(position && Number.isInteger(position) && position >= 0 && position < 10));
 
             currentPlayer = switchPlayer(currentPlayer);
             console.log(currentPlayer);
