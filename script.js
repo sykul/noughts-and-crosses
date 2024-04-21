@@ -77,10 +77,6 @@ const gameController = (function() {
         }
     }
 
-    function trackPlayerScore() {
-        
-    }
-
 
     return {playRound}
 })();
