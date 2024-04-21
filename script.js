@@ -3,7 +3,7 @@ function createGameBoard() {
     return boardArray;
 }
 
-const gameBoard = createGameBoard()
+let gameBoard = createGameBoard();
 
 function createPlayer(name, OorX) {
     const playerName = name;
@@ -42,7 +42,6 @@ const gameController = (function() {
         }
     }
     
-    
     function checkWinningCondition() {
         for (const condition in winningConditions) {
             positionToCheck1 = winningConditions[condition][0];
@@ -57,7 +56,7 @@ const gameController = (function() {
         return false;
     }
 
-    function playRound() { 
+    function playRound() {
         let position;
         for (let i = 0; i<9; i++) {
             do {
@@ -70,6 +69,7 @@ const gameController = (function() {
             gameBoard[position] = currentPlayer.symbol;
 
             if (checkWinningCondition() === true) {
+                restartGameState();
                 return currentPlayer.playerName;
             };
             
@@ -77,6 +77,10 @@ const gameController = (function() {
         }
     }
 
+    function restartGameState() {
+        gameBoard = createGameBoard();
+
+    }
 
     return {playRound}
 })();
