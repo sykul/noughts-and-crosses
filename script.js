@@ -1,5 +1,5 @@
 function createGameBoard() {
-    const boardArray = Array(9);
+    const boardArray = Array(9).fill(null);
     return boardArray;
 }
 
@@ -71,8 +71,9 @@ const gameController = (function() {
             if (checkWinningCondition() === true) {
                 restartGameState();
                 return currentPlayer.playerName;
-            } else if (checkWinningCondition() == false) {
-                
+            } else if (checkWinningCondition() == false
+                        && !(gameBoard.some((x) => x == null))) {
+                return 'Draw';
             }
             
             currentPlayer = switchPlayer(currentPlayer);
