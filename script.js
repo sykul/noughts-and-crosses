@@ -1,5 +1,5 @@
 function createGameBoard() {
-    const boardArray = ['','','','','','','','','']
+    const boardArray = Array(9);
     return boardArray;
 }
 
@@ -65,13 +65,15 @@ const gameController = (function() {
                         && Number.isInteger(position)
                         && position >= 0
                         && position < 9
-                        && gameBoard[position] == ''));
+                        && gameBoard[position] == null));
             gameBoard[position] = currentPlayer.symbol;
 
             if (checkWinningCondition() === true) {
                 restartGameState();
                 return currentPlayer.playerName;
-            };
+            } else if (checkWinningCondition() == false) {
+                
+            }
             
             currentPlayer = switchPlayer(currentPlayer);
         }
