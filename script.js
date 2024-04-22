@@ -82,7 +82,6 @@ const gameController = (function() {
 
     function restartGameState() {
         gameBoard = createGameBoard();
-
     }
 
     return {playRound}
