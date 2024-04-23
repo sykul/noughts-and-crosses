@@ -98,8 +98,7 @@ const displayController = (function() {
                 });
             });
         };
+    addEventListenersToCells()
 
-    return {addEventListenersToCells}
+    return (addEventListenersToCells)
 })();
-
-displayController.addEventListenersToCells()
