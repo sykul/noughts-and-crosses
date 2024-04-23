@@ -84,9 +84,22 @@ const gameController = (function() {
         gameBoard = createGameBoard();
     }
 
-    return {playRound}
+    return {playRound, currentPlayer}
 })();
 
 const displayController = (function() {
-    
+    const boardObject = document.querySelector(".board");
+    const cellObjects = boardObject.querySelectorAll(".cell");
+
+    function addEventListenersToCells() {
+        cellObjects.forEach((cell) => {
+            cell.addEventListener("click", function (e) {
+                console.log(gameController.currentPlayer);
+                });
+            });
+        };
+
+    return {addEventListenersToCells}
 })();
+
+displayController.addEventListenersToCells()
