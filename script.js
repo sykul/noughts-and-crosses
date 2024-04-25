@@ -64,18 +64,17 @@ const gameController = (function() {
         && position >= 0
         && position < 9
         && gameBoard[position] == null)) {
-            
+
             clickedCell.textContent = `${currentPlayer.symbol}`
             gameBoard[position] = currentPlayer.symbol;
 
             if (checkWinningCondition() === true) {
                 restartGameState();
-                console.log(currentPlayer.playerName)
-                return currentPlayer.playerName;
+                displayController.writeWinnersName(`Winner: ${currentPlayer.playerName}`);
             } else if (checkWinningCondition() == false
                         && !(gameBoard.some((x) => x == null))) {
                 restartGameState()
-                return 'Draw';
+                displayController.writeWinnersName("Draw!")
             }
 
             currentPlayer = switchPlayer(currentPlayer);
@@ -86,21 +85,44 @@ const gameController = (function() {
         gameBoard = createGameBoard();
     }
 
-    return {currentPlayer, makeAMove}
+    return {currentPlayer, makeAMove, restartGameState}
 })();
 
 const displayController = (function() {
+
     const boardObject = document.querySelector(".board");
     const cellObjects = boardObject.querySelectorAll(".cell");
+    const winnerName = document.querySelector(".winnerName");
+
+    function writeWinnersName(content) {
+        winnerName.textContent = `${content}`;
+    }
+
+    function resetGrid() {
+        cellObjects.forEach((cell) => {
+            cell.textContent = "";
+        })
+        writeWinnersName("Winner: ")
+    }
 
     function addEventListenersToCells() {
         cellObjects.forEach((cell) => {
             cell.addEventListener("click", function () {
-                gameController.makeAMove(this, gameController.currentPlayer.symbol)
+                gameController.makeAMove(this, gameController.currentPlayer.symbol);
                 });
             });
         };
-    addEventListenersToCells()
 
-    return {addEventListenersToCells}
+    function addEventListenerToButton() {
+        const resetButton = document.querySelector("#resetButton");
+        resetButton.addEventListener("click", function () {
+            resetGrid();
+            gameController.restartGameState();
+        })
+    }
+
+    addEventListenersToCells();
+    addEventListenerToButton();
+
+    return {writeWinnersName}
 })();
