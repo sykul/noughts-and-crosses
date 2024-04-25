@@ -56,7 +56,7 @@ const gameController = (function() {
         return false;
     }
 
-    function placeSymbol(position, currentPlayerSymbol) {
+    function makeAMove(position, currentPlayerSymbol) {
         if ((position.toString().length > 0
         && Number.isInteger(position)
         && position >= 0
@@ -79,7 +79,7 @@ const gameController = (function() {
         gameBoard = createGameBoard();
     }
 
-    return {playRound, currentPlayer, placeSymbol}
+    return {currentPlayer, makeAMove}
 })();
 
 const displayController = (function() {
@@ -88,10 +88,8 @@ const displayController = (function() {
 
     function addEventListenersToCells() {
         cellObjects.forEach((cell) => {
-            cell.addEventListener("click", function (e) {
-                console.log(this);
-                console.log(gameController.currentPlayer);
-
+            cell.addEventListener("click", function () {
+                gameController.makeAMove(Number(this.classList[1]), gameController.currentPlayer.symbol)
                 });
             });
         };
@@ -99,11 +97,3 @@ const displayController = (function() {
 
     return (addEventListenersToCells)
 })();
-
-gameController.placeSymbol(5, gameController.currentPlayer);
-gameController.placeSymbol(0, gameController.currentPlayer);
-gameController.placeSymbol(8, gameController.currentPlayer);
-gameController.placeSymbol(1, gameController.currentPlayer);
-gameController.placeSymbol(7, gameController.currentPlayer);
-gameController.placeSymbol(2, gameController.currentPlayer);
-gameController.placeSymbol(6, gameController.currentPlayer);
