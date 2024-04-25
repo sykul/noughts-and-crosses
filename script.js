@@ -56,21 +56,28 @@ const gameController = (function() {
         return false;
     }
 
-    function makeAMove(position, currentPlayerSymbol) {
+    function makeAMove(clickedCell, currentPlayerSymbol) {
+        position = Number(clickedCell.classList[1]);
+
         if ((position.toString().length > 0
         && Number.isInteger(position)
         && position >= 0
         && position < 9
         && gameBoard[position] == null)) {
+            
+            clickedCell.textContent = `${currentPlayer.symbol}`
             gameBoard[position] = currentPlayer.symbol;
+
             if (checkWinningCondition() === true) {
                 restartGameState();
                 console.log(currentPlayer.playerName)
                 return currentPlayer.playerName;
             } else if (checkWinningCondition() == false
                         && !(gameBoard.some((x) => x == null))) {
+                restartGameState()
                 return 'Draw';
             }
+
             currentPlayer = switchPlayer(currentPlayer);
         }
     }
@@ -89,11 +96,11 @@ const displayController = (function() {
     function addEventListenersToCells() {
         cellObjects.forEach((cell) => {
             cell.addEventListener("click", function () {
-                gameController.makeAMove(Number(this.classList[1]), gameController.currentPlayer.symbol)
+                gameController.makeAMove(this, gameController.currentPlayer.symbol)
                 });
             });
         };
     addEventListenersToCells()
 
-    return (addEventListenersToCells)
+    return {addEventListenersToCells}
 })();
