@@ -8,10 +8,7 @@ let gameBoard = createGameBoard();
 function createPlayer(name, OorX) {
     const playerName = name;
     const symbol = OorX;
-    let score = 0;
-    const increaseScore = () => ++score;
-    const resetScore = () => score = 0;
-    return {playerName, symbol, increaseScore, resetScore}
+    return {playerName, symbol}
 }
 
 const player1 = createPlayer('', 'O');
@@ -94,6 +91,7 @@ const gameController = (function() {
 
     function restartGameState() {
         gameBoard = createGameBoard();
+        currentPlayer = player1;
     }
 
     return {currentPlayer, makeAMove, restartGameState, assignPlayerOneName, assignPlayerTwoName}
