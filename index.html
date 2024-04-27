@@ -21,6 +21,18 @@
         <div class="cell 8"></div>
     </div>
 
+    <p>Names must be selected before playing:</p>
+
+    <label for="p1name">Player 1 (nought)'s name (4 to 8 characters):</label>
+    <input type="text" id="playerOneName" name="p1name" required minlength="4" maxlength="8" size="10" />
+    <button id="playerOneButton">Submit</button>
+    
+    <br>
+
+    <label for="p2name">Player 2 (cross)'s name (4 to 8 characters):</label>
+    <input type="text" id="playerTwoName" name="p2name" required minlength="4" maxlength="8" size="10" />
+    <button id="playerTwoButton">Submit</button>
+
     <p class="winnerName">Winner: </p>
     <button id="resetButton">Reset</button>
 </body>

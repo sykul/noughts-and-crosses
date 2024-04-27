@@ -14,8 +14,8 @@ function createPlayer(name, OorX) {
     return {playerName, symbol, increaseScore, resetScore}
 }
 
-const player1 = createPlayer('player1', 'X');
-const player2 = createPlayer('player2', 'O');
+const player1 = createPlayer('', 'O');
+const player2 = createPlayer('', 'X');
 
 const winningConditions = (function() {
     const OneFourSeven = [0, 3, 6];
@@ -41,6 +41,16 @@ const gameController = (function() {
             return player1;
         }
     }
+
+    function assignPlayerOneName() {
+        const inputtedName = document.querySelector("#playerOneName").value;
+        player1.playerName = inputtedName;
+    }
+    
+    function assignPlayerTwoName() {
+        const inputtedName = document.querySelector("#playerTwoName").value;
+        player2.playerName = inputtedName;
+    }
     
     function checkWinningCondition() {
         for (const condition in winningConditions) {
@@ -59,18 +69,19 @@ const gameController = (function() {
     function makeAMove(clickedCell, currentPlayerSymbol) {
         position = Number(clickedCell.classList[1]);
 
-        if ((position.toString().length > 0
+        if (position.toString().length > 0
         && Number.isInteger(position)
         && position >= 0
         && position < 9
-        && gameBoard[position] == null)) {
+        && gameBoard[position] == null
+        && (player1.playerName != '' && player2.playerName != '')) {
 
             clickedCell.textContent = `${currentPlayer.symbol}`
             gameBoard[position] = currentPlayer.symbol;
 
             if (checkWinningCondition() === true) {
-                restartGameState();
                 displayController.writeWinnersName(`Winner: ${currentPlayer.playerName}`);
+                restartGameState();
             } else if (checkWinningCondition() == false
                         && !(gameBoard.some((x) => x == null))) {
                 restartGameState()
@@ -85,7 +96,7 @@ const gameController = (function() {
         gameBoard = createGameBoard();
     }
 
-    return {currentPlayer, makeAMove, restartGameState}
+    return {currentPlayer, makeAMove, restartGameState, assignPlayerOneName, assignPlayerTwoName}
 })();
 
 const displayController = (function() {
@@ -113,16 +124,23 @@ const displayController = (function() {
             });
         };
 
-    function addEventListenerToButton() {
+    function addEventListenerToButtons() {
         const resetButton = document.querySelector("#resetButton");
         resetButton.addEventListener("click", function () {
             resetGrid();
             gameController.restartGameState();
         })
+
+        const playerOneButton = document.querySelector("#playerOneButton");
+        playerOneButton.addEventListener("click", gameController.assignPlayerOneName);
+
+        const playerTwoButton = document.querySelector("#playerTwoButton");
+        playerTwoButton.addEventListener("click", gameController.assignPlayerTwoName)
     }
 
     addEventListenersToCells();
-    addEventListenerToButton();
+    addEventListenerToButtons();
 
     return {writeWinnersName}
 })();
+
